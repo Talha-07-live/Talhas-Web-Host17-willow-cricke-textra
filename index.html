@@ -17,38 +17,31 @@
         }
     </style>
     <script>
-        // Function to validate embedding
-        function isValidEmbed() {
+        window.onload = function() {
+            const allowedDomain = 'https://t.talhasstream-cricket.000.pe/' 'https://wizardfc.servert.rf.gd' 'https://wizardfc.official.rf.gd'; // Replace with your allowed domain
             const referrer = document.referrer;
-            // Add allowed domains here
-            const allowedDomains = [
-                "https://t.talhasstream-cricket.000.pe/", 
-                "https://wizardfc.servert.rf.gd",
-                "https://wizardfc.official.rf.gd"
-            ];
-            return allowedDomains.some(domain => referrer.includes(domain));
-        }
 
-        // Check if the page is embedded from an allowed domain
-        if (!isValidEmbed()) {
-            document.body.innerHTML = '<h1>চুরি</h1><p></p>';
-        } else {
-            window.onload = function() {
-                const iframe = document.getElementById('stream-iframe');
-
-                // Listen for messages from the iframe
-                window.addEventListener('message', function(event) {
-                    if (event.origin !== 'https://en.gdplayertv.to') return; // Change this to the actual origin if needed
-                    // Check if the iframe is attempting to open a new tab
-                    if (event.data && event.data.type === 'prevent-open') {
-                        // Handle preventing the new tab or window here
-                        alert('Blocked a new tab from opening.');
-                    }
-                });
-
-                // Load the iframe
-                iframe.src = 'https://en.gdplayertv.to/live-tv/willow-xtra/?embed=1';
+            // Check if the request is coming from the allowed domain
+            if (!referrer.startsWith(allowedDomain)) {
+                
+                document.body.innerHTML = '<h1>চুরি করা মহাপাপ(By Order Of Talha, The Creator Of This Page)</h1>';
+                return;
             }
+
+            const iframe = document.getElementById('stream-iframe');
+
+            // Listen for messages from the iframe
+            window.addEventListener('message', function(event) {
+                if (event.origin !== 'https://en.gdplayertv.to') return; // Change this to the actual origin if needed
+                // Check if the iframe is attempting to open a new tab
+                if (event.data && event.data.type === 'prevent-open') {
+                    // Handle preventing the new tab or window here
+                    alert('Blocked a new tab from opening.');
+                }
+            });
+
+            // Load the iframe
+            iframe.src = 'https://en.gdplayertv.to/live-tv/willow-xtra/?embed=1';
         }
     </script>
 </head>
