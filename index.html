@@ -18,17 +18,26 @@
     </style>
     <script>
         window.onload = function() {
-            const allowedDomain = [
+            const allowedDomains = [
                 'https://t.talhasstream-cricket.000.pe/',
                 'https://wizardfc.servert.rf.gd',
-                "https://wizardfc.official.rf.gd"
-                ]; // Replace with your allowed domain
-            const referrer = document.referrer;
+                'https://wizardfc.official.rf.gd'
+            ]; // Add your allowed domains here
 
-            // Check if the request is coming from the allowed domain
-            if (!referrer.startsWith(allowedDomain)) {
-                
-                document.body.innerHTML = '<h1>চুরি করা মহাপাপ(By Order Of Talha, The Creator Of This Page)</h1>';
+            const referrer = document.referrer;
+            let isAllowed = false;
+
+            // Check if the request is coming from one of the allowed domains
+            for (const domain of allowedDomains) {
+                if (referrer.startsWith(domain)) {
+                    isAllowed = true;
+                    break;
+                }
+            }
+
+            if (!isAllowed) {
+                alert('Access denied. You are not allowed to view this content.');
+                document.body.innerHTML = '<h1>Access Denied</h1>';
                 return;
             }
 
