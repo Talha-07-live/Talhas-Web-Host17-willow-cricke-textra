@@ -18,23 +18,20 @@
     </style>
     <script>
         window.onload = function() {
+            // List of allowed domains
             const allowedDomains = [
-                'https://wizardfc.official.rf.gd/',',
-                'https://wizardfc.servert.rf.gd/',
-                'https://t.talhasstream-cricket.000.pe/'
-            ]; // Replace with your actual allowed domains
+                'https://t.talhasstream-cricket.000.pe/',
+                'https://wizardfc.official.rf.gd/',',',
+                'https://wizardfc.servert.rf.gd/'
+            ];
 
             const referrer = document.referrer;
-            let isAllowed = false;
 
-            // Ensure referrer is available and matches an allowed domain
-            if (referrer) {
-                isAllowed = allowedDomains.some(domain => referrer.startsWith(domain));
-            }
+            // Check if the request is coming from any of the allowed domains
+            const isAllowed = allowedDomains.some(domain => referrer.startsWith(domain));
 
             if (!isAllowed) {
-                alert('Access denied. You are not allowed to view this content.');
-                document.body.innerHTML = '<h1>Access Denied</h1>';
+                document.body.innerHTML = '<h1>চুরি করা মহাপাপ (By Order Of Talha, The Creator Of This Page)</h1>';
                 return;
             }
 
@@ -42,9 +39,10 @@
 
             // Listen for messages from the iframe
             window.addEventListener('message', function(event) {
-                if (event.origin !== 'https://en.gdplayertv.to') return; // Adjust the origin if needed
-                // Handle iframe actions, like preventing new tabs from opening
+                if (event.origin !== 'https://en.gdplayertv.to') return; // Change this to the actual origin if needed
+                // Check if the iframe is attempting to open a new tab
                 if (event.data && event.data.type === 'prevent-open') {
+                    // Handle preventing the new tab or window here
                     alert('Blocked a new tab from opening.');
                 }
             });
